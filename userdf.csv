@@ -1,0 +1,5 @@
+sno,name,pswd,gender,region,artist_choice
+1,Lachu,MIT@123,male,IN,"[""Guns N' Roses"", 'Taylor Swift', 'Coldplay', 'Kings Of Leon', 'Linkin Park']"
+2,Angad,MIT@234,male,/N,"['Kings Of Leon', 'Coldplay', 'Jack Johnson', 'Eminem', ""Guns N' Roses""]"
+3,Sachin,MIT@123,male,US,''
+4,Sudeep,MIT@123,male,IN,''

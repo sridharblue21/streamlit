@@ -4,14 +4,14 @@ import appconfig #import for data file
 staticpath=appconfig.staticpath()
 datapath=appconfig.datapath() # data file path
 
-@st.cache(persist=True) #cache data from dataframe to avoid loading it each time when the function is called
+@st.cache(persist=True) # cache data from dataframe to avoid loading it each time when the function is called
 def read_song():
     filename='/song_data_with_gender.csv'
     datafile=datapath + filename
     song_data = pd.read_csv(datafile)
     return song_data
 
-@st.cache(persist=True) #cache data from dataframe to avoid loading it each time when the function is called
+@st.cache(persist=True) # cache data from dataframe to avoid loading it each time when the function is called
 def read_count():
     filename='/count_data.csv'
     datafile=datapath + filename
@@ -31,3 +31,9 @@ def read_rating():
     datafile=datapath + filename
     rating_data = pd.read_csv(datafile,sep='\t')
     return rating_data
+
+# @st.cache #cache data from dataframe to avoid loading it each time when the function is called
+def read_user():
+    filename='userdf.csv'
+    user=pd.read_csv(filename,sep=',',index_col='sno')
+    return user
