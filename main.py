@@ -2,7 +2,6 @@ import streamlit as st
 import stapp # import sub-module stapp
 from load_css import local_css
 import login
-import authenticate
 import popular_reco
 import menu
 import user_reg
@@ -28,7 +27,7 @@ def main():
             st.table(usr_lst)
             st.write('\n')
             if yourname == 'Lachu':
-                ret_val = user_reg.register()  # display user registration option when user not authenticated
+                ret_val = user_reg.register()  # display user registration option when user is authenticated
                 ret_msg = f"<div><span class='highlight red'>{ret_val}</span></div>"
                 st.markdown(ret_msg, unsafe_allow_html=True)
         elif menu_out == 'User Choices':

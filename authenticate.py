@@ -1,4 +1,3 @@
-import streamlit as st
 import readdata
 userdf = readdata.read_user()
 
