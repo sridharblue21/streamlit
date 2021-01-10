@@ -10,7 +10,7 @@ def authenticate(yourname, yourpass):
             # if yourpass == 'MIT@123': #display blocks below if yourpass is not equal to hashed code
                 return 'authenticated'
             else:
-                return "<div>Enter <span class='highlight blue'>matching passcode</span></div>"
+                return "<div>Enter <span class='highlight blue'>matching name/passcode</span></div>"
         else:
             return "<div>Enter <span class='highlight red'>passcode</span></div>"
     else:

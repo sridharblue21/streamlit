@@ -1,5 +1,7 @@
-sno,name,pswd,gender,region,artist_choice
-1,Lachu,MIT@123,male,IN,"[""Guns N' Roses"", 'Taylor Swift', 'Coldplay', 'Kings Of Leon', 'Linkin Park']"
-2,Angad,MIT@234,male,/N,"['Kings Of Leon', 'Coldplay', 'Jack Johnson', 'Eminem', ""Guns N' Roses""]"
-3,Sachin,MIT@123,male,US,''
-4,Sudeep,MIT@123,male,IN,''
+sno,name,pswd,gender,region,artist_choice,release_choice
+1,Lachu,MIT@123,male,IN,"[""Guns N' Roses"", 'Taylor Swift', 'Coldplay', 'Kings Of Leon', 'Linkin Park']","['Only By The Night', 'My Worlds', 'Fearless', 'Lungs', 'Incredibad']"
+2,Angad,MIT@234,male,/N,"['Kings Of Leon', 'Coldplay', 'Jack Johnson', 'Eminem', ""Guns N' Roses""]",
+3,Sachin,MIT@123,male,US,'',
+4,Sudeep,MIT@123,male,IN,'',
+5,Raj,MIT@123,male,IN,"['Björk', 'Taylor Swift', 'Metallica', 'Dwight Yoakam', 'Gorillaz']","['Summertime', 'If There Was A Way', 'Fat Come Back', ""We Don't Need To Whisper"", 'Fearless']"
+6,Preethi,MIT@123,female,/N,'',

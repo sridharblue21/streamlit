@@ -38,12 +38,25 @@ def main():
             if pop:
                 choice = st.multiselect('choose your favourite artists', options=pop, key=844)
                 if len(choice) == 5:
-                    ret_val = popular_reco.insert_user_choice(yourname,choice)
+                    ret_val = popular_reco.insert_user_choice(yourname, choice, flag='A')
                     if ret_val == 'success':
                         pop_msg = f"<div>Your favourite(s), <span class='highlight blue'>{choice}</span></div>"
                         st.markdown(pop_msg, unsafe_allow_html=True)
 
             st.write('\n')
+
+            pop_rel = popular_reco.release_choice()  # populate list of popular artists
+            if pop_rel:
+                rel_choice = st.multiselect('choose your favourite albums/releases', options=pop_rel, key=845)
+                if len(rel_choice) == 5:
+                    ret_val = popular_reco.insert_user_choice(yourname, rel_choice, flag='R')
+                    if ret_val == 'success':
+                        pop_rel_msg = f"<div>Your favourite(s), <span class='highlight blue'>{rel_choice}</span></div>"
+                        st.markdown(pop_rel_msg, unsafe_allow_html=True)
+
+            st.write('\n')
+
+
         elif menu_out=='Popular Titles':
             # menu_mesg=stapp.func_welcome(menu_out,1)# call welcome function from the sub-module
             # st.markdown(menu_mesg, unsafe_allow_html=True)
