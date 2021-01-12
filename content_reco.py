@@ -19,10 +19,10 @@ def recommendations(title):  # function that takes in song title as input and re
     doc_l = []
     score_l = []
     song_data_with_genre = readdata.read_song_genre()
-    song_data_with_genre = song_data_with_genre.drop(columns=['Unnamed: 0', 'Unnamed: 0.1', 'tid'])
+    song_data_with_genre = song_data_with_genre[['title', 'artist_name', 'release','genre','year','artist_gender']]
     # Compute similarity against a corpus of documents by storing the sparse index matrix in memory.
     index = similarities.SparseMatrixSimilarity(tfidf[bow_corpus], num_features=len(dictionary.token2id))
-    query_document = title.lower().split()
+    query_document = title.lower().split() # assign search title
     query_bow = dictionary.doc2bow(query_document)
     sims = index[tfidf[query_bow]]
 
@@ -30,14 +30,16 @@ def recommendations(title):  # function that takes in song title as input and re
         doc_l.append(document_number)
         score_l.append(score)
 
-    recommended_songs_idx_score = pd.DataFrame(score_l, doc_l).head(10)
+    recommended_songs_idx_score = pd.DataFrame(score_l, doc_l).head(10) # top 10 title recommendations
     recommended_songs_idx_score = recommended_songs_idx_score.reset_index()
     recommended_songs_idx_score.columns = ['index', 'score']
     recommended_songs_idx_score.set_index('index', inplace=True)
 
-    # song recommendations based on content searched
+    # song titles with top score recommended based on the content searched by user
     for idx in recommended_songs_idx_score.index:
-        dict_reco = dict(song_data_with_genre.loc[idx][['title', 'artist_name']])
+        dict_reco = dict(song_data_with_genre.loc[idx][['title', 'artist_name', 'release','genre','year']])
         reco.append(dict_reco)
     recommended_songs = pd.DataFrame(reco)
+    recommended_songs['sno'] = [x for x in range(1, len(recommended_songs) + 1)]
+    recommended_songs.set_index('sno', inplace=True) # setting sno as index
     return recommended_songs
