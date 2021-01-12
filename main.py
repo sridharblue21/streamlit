@@ -6,6 +6,7 @@ import popular_reco
 import menu
 import user_reg
 import user_list
+import content_reco
 
 local_css("style.css") # include style.css
 
@@ -67,12 +68,20 @@ def main():
                 # st.markdown(sub_menu_mesg, unsafe_allow_html=True)
                 st.write('\n')
                 n=st.slider('Select how many song recommendations you would need?',min_value=2, max_value=10)
-                top_pop_songs_title = stapp.top_pop_songs(n)# call popular songs function top-5
+                title, top_pop_songs_title = stapp.top_pop_songs(n)# call popular songs function top-5
                 st.subheader(f"Most played titles, {n} recommendations for you")
                 st.spinner()
                 with st.spinner(text='In progress'):
                     st.table(top_pop_songs_title)
                     st.success('Done')
+
+                    # content based recommendation of related titles
+                search_title = st.radio('Click here for related titles ', options=title, key=555)
+                st.header('Top 10 related titles based on your selection')
+                st.write('\n')
+                recommended_songs = content_reco.recommendations(search_title)
+                st.table(recommended_songs)
+
             elif sub_menu_out == 'Most Rated':
                 #sub_menu_mesg = stapp.func_welcome(sub_menu_out,2)
                 #st.markdown(sub_menu_mesg, unsafe_allow_html=True)
@@ -90,6 +99,17 @@ def main():
                 else:
                     st.write('Choose your region')
             st.write('\n')
+        elif menu_out == 'Search songs':
+
+            st.header(menu_out)
+            # content based recommendation of related titles
+            search_title = st.text_input(' ', key=999)
+            if search_title:
+                st.header('Top 10 related titles based on your search')
+                st.write('\n')
+                recommended_songs = content_reco.recommendations(search_title)
+                st.table(recommended_songs)
+
     else:
         st.sidebar.markdown(auth,unsafe_allow_html=True)
 

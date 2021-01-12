@@ -37,3 +37,11 @@ def read_user():
     filename='userdf.csv'
     user=pd.read_csv(filename,sep=',',index_col='sno')
     return user
+
+@st.cache(persist=True) #cache data from dataframe to avoid loading it each time when the function is called
+def read_song_genre():
+    filename='/song_data_with_genre.csv'
+    datafile=datapath + filename
+    rating_data = pd.read_csv(datafile,sep=',')
+    return rating_data
+

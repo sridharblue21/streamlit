@@ -50,11 +50,13 @@ def top_pop_songs(n): #top popular songs recommendation by play count
     final_play_count = pd.DataFrame({'sum_play_count': sum_play_count, 'count_play_count': count_play_count})
     #Top n popular songs from song data for new users
     top_pop_songs_id = list(popular_reco.top_played_n_songs(final_play_count, n, min_interaction=50))
+    title = np.unique(song_data[song_data.song_id.isin(top_pop_songs_id)].title.values)
     choices=np.unique(song_data[song_data.song_id.isin(top_pop_songs_id)].title.values)+' by '+np.unique(song_data[song_data.song_id.isin(top_pop_songs_id)].artist_name.values)
     top_pop_songs_title = pd.DataFrame(choices, [x for x in range(1, n+1)]).reset_index()
     top_pop_songs_title.columns = ['S.No', 'Titles']
     top_pop_songs_title.set_index('S.No', inplace=True)
-    return top_pop_songs_title
+    return title, top_pop_songs_title
+
 
 @st.cache(persist=True)
 def top_rated_songs(n,region): #top rated songs recommendation (combining IMDb dataset)
