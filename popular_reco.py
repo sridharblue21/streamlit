@@ -41,7 +41,7 @@ def release_choice():  # top 20 releases/albums by playcount
 def top_played_n_songs(final_play_count, n, min_interaction=50):
     recommendations=final_play_count[final_play_count['count_play_count']>min_interaction]
     recommendations=recommendations.sort_values(by='sum_play_count', ascending=False)
-    return recommendations.index[:n]
+    return recommendations[:n]
 
 def top_rated_n_songs(song_imdb_merge, n, min_interaction=20):
     recommendations=song_imdb_merge[song_imdb_merge['numVotes']>min_interaction]
