@@ -77,7 +77,7 @@ def main():
 
                     # content based recommendation of related titles
                 search_title = st.radio('Click here for related titles ', options=title, key=555)
-                st.header('Top 10 related titles based on your selection')
+                st.header('Related titles based on your selection')
                 st.write('\n')
                 recommended_songs = content_reco.recommendations(search_title)
                 st.table(recommended_songs)
@@ -105,7 +105,7 @@ def main():
             # content based recommendation of related titles
             search_title = st.text_input(' ', key=999)
             if search_title:
-                st.header('Top 10 related titles based on your search')
+                st.header('Related titles based on your search')
                 st.write('\n')
                 recommended_songs = content_reco.recommendations(search_title)
                 st.table(recommended_songs)

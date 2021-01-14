@@ -45,5 +45,5 @@ def top_played_n_songs(final_play_count, n, min_interaction=50):
 
 def top_rated_n_songs(song_imdb_merge, n, min_interaction=20):
     recommendations=song_imdb_merge[song_imdb_merge['numVotes']>min_interaction]
-    recommendations=recommendations.sort_values(by='averageRating', ascending=False)
-    return recommendations.index[:n]
+    recommendations=recommendations.sort_values(by=['numVotes', 'averageRating'], ascending=False)
+    return recommendations[:n]
