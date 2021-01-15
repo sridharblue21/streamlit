@@ -65,3 +65,10 @@ def read_song_genre():
     datafile=datapath + filename
     rating_data = pd.read_csv(datafile,sep=',')
     return rating_data
+
+@st.cache(persist=True) #cache data from dataframe to avoid loading it each time when the function is called
+def read_song_bowdf():
+    filename='/song_data_bow_df.csv'
+    datafile=datapath + filename
+    senti_data = pd.read_csv(datafile,sep=',')
+    return senti_data

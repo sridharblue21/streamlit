@@ -5,3 +5,4 @@ sno,name,pswd,gender,region,artist_choice,release_choice
 4,Sudeep,MIT@123,male,IN,'',
 5,Raj,MIT@123,male,IN,"['Björk', 'Taylor Swift', 'Metallica', 'Dwight Yoakam', 'Gorillaz']","['Summertime', 'If There Was A Way', 'Fat Come Back', ""We Don't Need To Whisper"", 'Fearless']"
 6,Preethi,MIT@123,female,/N,'',
+7,Shanti,MIT@123,female,IN,,
