@@ -1,6 +1,6 @@
-import joblib  # Save to file to pkl file
+import readdata  # read pkl file from here
 
-gender_model = joblib.load('gender_classify.pkl')
+gender_model = readdata.read_data_gdrive('gender_classify.pkl', type = 'joblib')
 
 def gender_features(word):
     return {'last_letter': word[-1]}

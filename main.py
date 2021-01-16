@@ -87,7 +87,7 @@ def main():
                     st.success('Done')
 
                     # content based recommendation of related titles
-                search_title = st.radio('Click here for related titles ', options=title, key=555)
+                search_title = st.selectbox('Click here for related titles ', options=title, key=555)
                 st.header('Related titles based on your selection')
                 st.write('\n')
                 recommended_songs = content_reco.text_recommendations(search_title)

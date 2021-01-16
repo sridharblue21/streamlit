@@ -8,9 +8,9 @@ import readdata
 
 local_css('style.css')
 
-song_data = readdata.read_song()
-count_data = readdata.read_count()
-song_imdb_merge = readdata.read_song_imdb_rating()
+song_data = readdata.read_data_gdrive('song_data_with_gender.csv')
+count_data = readdata.read_data_gdrive('count_data.pkl')
+song_imdb_merge = readdata.read_data_gdrive('song_only_imdb_merge.pkl')
 
 def func_welcome(menu_in, level=1):
     # menu_in is menu name, level is signify if its main menu or submenu (only two level possible now)
@@ -34,13 +34,10 @@ def fn_songs_play_count():
     sorted_play_counts_df.reset_index(inplace=True)
     sorted_play_counts_df.set_index('song_id',
                                     inplace=True)
-    # making song_id index of the df, this is required to merge with song_data df
-
-    # Sorted in descending order of play_count to see the top play counts first
     songs_play_count_df = pd.merge(sorted_play_counts_df, song_data, on='song_id')
-    return songs_play_count_df, song_data, count_data
+    return songs_play_count_df
 
-songs_play_count_df, song_data, count_data = fn_songs_play_count()
+songs_play_count_df = fn_songs_play_count()
 
 @st.cache(persist=True)
 def top_pop_songs(n): #top popular songs recommendation by play count

@@ -1,31 +1,29 @@
 import readdata
 import pandas as pd
-from gensim import corpora, similarities
-import pickle
-import joblib
+from gensim import corpora
 
-# load pickle files
-processed_corpus = pickle.load( open( "processed_corpus.pkl", "rb" ) )
-index = joblib.load("gensim_sparse_similarities.pkl")
-# gensim_tfidf_model => models.TfidfModel()
-tfidf = joblib.load('gensim_tfidf_model.pkl')
+song_data_with_genre1 = readdata.read_data_gdrive('song_data_with_genre.pkl')
+song_bowdf1 = readdata.read_data_gdrive('song_data_bow_df.csv')
 
+# load pickle files for genre search
+processed_corpus = readdata.read_data_gdrive('processed_corpus.pkl', type = 'joblib')
+index = readdata.read_data_gdrive('gensim_sparse_similarities.pkl', type = 'joblib')
+tfidf = readdata.read_data_gdrive('gensim_tfidf_model.pkl', type = 'joblib')
 dictionary = corpora.Dictionary(processed_corpus)
 #######################################################
-# Lyrics search
-# load pickle files
-lyrics_processed_corpus = pickle.load( open( "lyrics_processed_corpus.pkl", "rb" ) )
-lyrics_index = joblib.load("lyrics_gensim_sparse_similarities.pkl")
-# gensim_tfidf_model => models.TfidfModel()
-lyrics_tfidf = joblib.load('lyrics_gensim_tfidf_model.pkl')
-
+# load pickle files Lyrics search
+lyrics_processed_corpus = readdata.read_data_gdrive('lyrics_processed_corpus.pkl', type = 'joblib')
+lyrics_index = readdata.read_data_gdrive('lyrics_gensim_sparse_similarities.pkl', type = 'joblib')
+lyrics_tfidf = readdata.read_data_gdrive('lyrics_gensim_tfidf_model.pkl', type = 'joblib')
 lyrics_dictionary = corpora.Dictionary(lyrics_processed_corpus)
 
 def text_recommendations(title):  # function that takes in song title as input and returns the top 10 recommended songs
     reco = []
     doc_l = []
     score_l = []
-    song_data_with_genre = readdata.read_song_genre()
+    song_data_with_genre = song_data_with_genre1
+    song_data_with_genre.genre = song_data_with_genre.genre.astype('object')
+    song_data_with_genre.release = song_data_with_genre.release.astype('object')
     song_data_with_genre = song_data_with_genre[['title', 'artist_name', 'release','genre','year']]
     query_document = title.lower().split() # assign search title
     query_bow = dictionary.doc2bow(query_document)
@@ -55,7 +53,7 @@ def lyrics_recommendations(title):  # function that takes in song title as input
     reco = []
     doc_l = []
     score_l = []
-    song_bowdf = readdata.read_song_bowdf()
+    song_bowdf = song_bowdf1
     song_bowdf = song_bowdf[['title', 'artist_name', 'release','genre','year']]
     lyrics_query_document = title.lower().split() # assign search title
     lyrics_query_bow = dictionary.doc2bow(lyrics_query_document)
