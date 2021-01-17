@@ -1,13 +1,14 @@
 import streamlit as st
-import stapp # import sub-module stapp
+import stapp # import top_pop_songs, top_rated_songs # import sub-module stapp
 from load_css import local_css
 import login
 import popular_reco
 import menu
-import user_reg
-import user_list
+from user_reg import register
+from user_list import user_list
 import content_reco
-import senti_collection
+from senti_collection import top_senti_recommendation
+from load_album_imge import open_image
 
 local_css("style.css") # include style.css
 
@@ -26,20 +27,20 @@ def main():
             radio_collect = st.select_slider('Select your mood now ', options=['happy','neutral','sad'])
             n = st.slider('Select how many song recommendations you would need?',min_value= 2, max_value=10)
             if radio_collect and n:
-                senti_reco = senti_collection.top_senti_recommendation(radio_collect, n)
+                senti_reco = top_senti_recommendation(radio_collect, n)
                 st.write('\n')
                 if not senti_reco.empty:
                     st.header(f'Top {n} {radio_collect} titles recommendation for you')
                     st.table(senti_reco)
 
         elif menu_out == 'User Registration':
-            usr_lst=user_list.user_list()
+            usr_lst = user_list()
             st.header('Registered users list.')
             st.write('Total no of users: '+str(len(usr_lst.name)))
             st.table(usr_lst)
             st.write('\n')
             if yourname == 'Lachu':
-                ret_val = user_reg.register()  # display user registration option when user is authenticated
+                ret_val = register()  # display user registration option when user is authenticated
                 ret_msg = f"<div><span class='highlight red'>{ret_val}</span></div>"
                 st.markdown(ret_msg, unsafe_allow_html=True)
         elif menu_out == 'User Choices':
@@ -81,12 +82,10 @@ def main():
                 n=st.slider('Select how many song recommendations you would need?',min_value=2, max_value=10)
                 title, top_pop_songs_title = stapp.top_pop_songs(n)# call popular songs function top-5
                 st.subheader(f"Most played titles, {n} recommendations for you")
-                st.spinner()
-                with st.spinner(text='In progress'):
-                    st.table(top_pop_songs_title)
-                    st.success('Done')
+                st.table(top_pop_songs_title)
 
-                    # content based recommendation of related titles
+
+                # content based recommendation of related titles
                 search_title = st.selectbox('Click here for related titles ', options=title, key=555)
                 st.header('Related titles based on your selection')
                 st.write('\n')
@@ -136,11 +135,16 @@ def main():
                 st.write('\n')
                 recommended_songs = content_reco.lyrics_recommendations(search_title)
                 recommended_songs = recommended_songs[recommended_songs.score > 0] # filter out 0 score songs
+
                 if recommended_songs.empty:
                     related_msg = f"<div> >>>>>>>>> <span class='highlight lblue'>Sorry, couldn't find related songs.</span> >>>>>>>>> </div>"
                     st.markdown(related_msg, unsafe_allow_html=True)
                 else:
+                    #release_images = open_image(recommended_songs.artist_name, recommended_songs.release)
                     st.table(recommended_songs)
+                    #for images in release_images:
+                    #    if not images == None:
+                    #        st.image(images)
 
     else:
         st.sidebar.markdown(auth,unsafe_allow_html=True)

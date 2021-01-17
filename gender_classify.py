@@ -1,6 +1,9 @@
 import readdata  # read pkl file from here
+import streamlit as st
 
-gender_model = readdata.read_data_gdrive('gender_classify.pkl', type = 'joblib')
+with st.spinner('Wait for gender model to load ...'):
+    gender_model = readdata.read_data_gdrive('gender_classify.pkl', type = 'joblib')
+st.success('gender model loaded')
 
 def gender_features(word):
     return {'last_letter': word[-1]}

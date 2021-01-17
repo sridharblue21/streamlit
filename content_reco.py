@@ -1,21 +1,29 @@
 import readdata
 import pandas as pd
 from gensim import corpora
+import streamlit as st
 
-song_data_with_genre1 = readdata.read_data_gdrive('song_data_with_genre.pkl')
-song_bowdf1 = readdata.read_data_gdrive('song_data_bow_df.csv')
+with st.spinner('Wait for song_data_with_genre and song_bowdf to load ...'):
+    song_data_with_genre1 = readdata.read_data_gdrive('song_data_with_genre.pkl')
+    song_bowdf1 = readdata.read_data_gdrive('song_data_bow_df.csv')
+st.success('song_data_with_genre and song_bowdf loaded')
 
 # load pickle files for genre search
-processed_corpus = readdata.read_data_gdrive('processed_corpus.pkl', type = 'joblib')
-index = readdata.read_data_gdrive('gensim_sparse_similarities.pkl', type = 'joblib')
-tfidf = readdata.read_data_gdrive('gensim_tfidf_model.pkl', type = 'joblib')
-dictionary = corpora.Dictionary(processed_corpus)
+with st.spinner('Wait for text_corpus, similarity_index and model to load ...'):
+    processed_corpus = readdata.read_data_gdrive('processed_corpus.pkl', type = 'joblib')
+    index = readdata.read_data_gdrive('gensim_sparse_similarities.pkl', type = 'joblib')
+    tfidf = readdata.read_data_gdrive('gensim_tfidf_model.pkl', type = 'joblib')
+    dictionary = corpora.Dictionary(processed_corpus)
+st.success('text_corpus, similarity_index and model loaded')
+
 #######################################################
 # load pickle files Lyrics search
-lyrics_processed_corpus = readdata.read_data_gdrive('lyrics_processed_corpus.pkl', type = 'joblib')
-lyrics_index = readdata.read_data_gdrive('lyrics_gensim_sparse_similarities.pkl', type = 'joblib')
-lyrics_tfidf = readdata.read_data_gdrive('lyrics_gensim_tfidf_model.pkl', type = 'joblib')
-lyrics_dictionary = corpora.Dictionary(lyrics_processed_corpus)
+with st.spinner('Wait for lyrics_corpus, similarity_index and model to load ...'):
+    lyrics_processed_corpus = readdata.read_data_gdrive('lyrics_processed_corpus.pkl', type = 'joblib')
+    lyrics_index = readdata.read_data_gdrive('lyrics_gensim_sparse_similarities.pkl', type = 'joblib')
+    lyrics_tfidf = readdata.read_data_gdrive('lyrics_gensim_tfidf_model.pkl', type = 'joblib')
+    lyrics_dictionary = corpora.Dictionary(lyrics_processed_corpus)
+st.success('lyrics_corpus, similarity_index and model loaded')
 
 def text_recommendations(title):  # function that takes in song title as input and returns the top 10 recommended songs
     reco = []
