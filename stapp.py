@@ -1,5 +1,4 @@
 import streamlit as st
-# To make things easier later, we're also importing numpy and pandas for
 import pandas as pd
 import numpy as np
 import popular_reco
@@ -56,6 +55,19 @@ def fn_songs_play_count():
     return songs_play_count_df
 
 songs_play_count_df = fn_songs_play_count()
+
+
+def artist_choice():  # top 20 artist by playcount
+    artist_choice = songs_play_count_df[['artist_name','play_count']].groupby('artist_name').sum().sort_values(by='play_count',ascending=False)[:20]
+    artist_choice = artist_choice.reset_index()
+    return list(artist_choice['artist_name'].values)
+
+
+def release_choice():  # top 20 releases/albums by playcount
+    artist_choice = songs_play_count_df[['release','play_count']].groupby('release').sum().sort_values(by='play_count',ascending=False)[:20]
+    artist_choice = artist_choice.reset_index()
+    return list(artist_choice['release'].values)
+
 
 @st.cache(persist=True)
 def top_pop_songs(n): #top popular songs recommendation by play count

@@ -8,10 +8,8 @@ from user_reg import register
 from user_list import user_list
 import content_reco
 from senti_collection import top_senti_recommendation
-from load_album_imge import open_image
 from PIL import Image
 from cf_user_item_reco import ui_recommendation
-import pandas as pd
 
 local_css("style.css") # include style.css
 
@@ -51,7 +49,7 @@ def main():
         elif menu_out == 'User Choices':
             # menu_mesg = stapp.func_welcome(menu_out,1)# call welcome function from the sub-module
             # st.markdown(menu_mesg, unsafe_allow_html=True)
-            pop = popular_reco.artist_choice()  # populate list of popular artists
+            pop = stapp.artist_choice()  # populate list of popular artists
             if pop:
                 choice = st.multiselect('choose your favourite artists', options=pop, key=844)
                 if len(choice) == 5:
@@ -62,7 +60,7 @@ def main():
 
             st.write('\n')
 
-            pop_rel = popular_reco.release_choice()  # populate list of popular artists
+            pop_rel = stapp.release_choice()  # populate list of popular artists
             if pop_rel:
                 rel_choice = st.multiselect('choose your favourite albums/releases', options=pop_rel, key=845)
                 if len(rel_choice) == 5:
