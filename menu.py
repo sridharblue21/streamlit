@@ -2,7 +2,8 @@ import streamlit as st
 
 def menu():
     st.write('\n')
-    menu_choice = st.sidebar.radio("Main Pages>>>>>", ('Senti-Collections', 'Popular Titles', 'Search songs', 'User Registration', 'User Choices'), index=0,key=1)
+    menu_choice = st.sidebar.radio("Main Pages>>>>>", ('Senti-Collections', 'Popular Titles',
+                                                       'Content Based Recommendation', 'User Registration', 'User Choices'), index=0,key=1)
     return menu_choice
 
 def submenu_1():

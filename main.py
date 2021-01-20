@@ -127,13 +127,13 @@ def main():
 
 
             st.write('\n')
-        elif menu_out == 'Search songs':
+        elif menu_out == 'Content Based Recommendation':
 
             st.header(menu_out)
             # content based recommendation of related titles
-            search_options = st.radio('', options=['Search based on title, artist name, release, and genre', 'Search based on lyrics'], key = 5666)
+            search_options = st.radio('', options=['Recommend based on title, artist name, release, and genre', 'Recommend based on lyrics'], key = 5666)
             search_title = st.text_input(' ', key=999)
-            if search_title and search_options == 'Search based on title, artist name, release, and genre':
+            if search_title and search_options == 'Recommend based on title, artist name, release, and genre':
                 st.header('Related titles based on your search')
                 st.write('\n')
                 recommended_songs = content_reco.text_recommendations(search_title)
@@ -143,8 +143,8 @@ def main():
                     st.markdown(related_msg, unsafe_allow_html=True)
                 else:
                     st.table(recommended_songs)
-            elif search_title and search_options == 'Search based on lyrics':
-                st.header('Related titles based on your search')
+            elif search_title and search_options == 'Recommend based on lyrics':
+                st.header('Related titles based on your search content')
                 st.write('\n')
                 recommended_songs = content_reco.lyrics_recommendations(search_title)
                 recommended_songs = recommended_songs[recommended_songs.score > 0] # filter out 0 score songs

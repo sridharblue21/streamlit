@@ -14,3 +14,21 @@ Use transactional user data to develop a recommendation system that can be adopt
 -to use this change path of data files to point to you data location in appconfig.py
 
 Demo video: https://drive.google.com/file/d/1V0IISlYKb7dC_B0bNjQGqsB3OxjkfTuC/view?usp=sharing
+
+Installation procedure:
+- Requires Python 3.6 and above (pre-requisite)
+- Install PyCharm
+- Inside PyCharm venv (virtual environment) pip install the following packages in addition to default python packages such as pandas, numpy
+- pip install streamlit
+- pip install gensim
+- pip install PIL
+- pip install scipy
+- pip install joblib
+- pip install pickle
+- pip install urllib
+- pip install requests
+
+Run Streamlit inside PyCharm (venv)
+- streamlit run main.py
+
+Login as Lachu/MIT@123. Allow datasets to load into memory, this takes about 3-5 minutes. Hurray! You are all set to use the app. Welcome to Dhwani - A million melodies!
