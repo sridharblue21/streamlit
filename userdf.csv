@@ -1,8 +1,8 @@
-sno,name,pswd,gender,region,artist_choice,release_choice
-1,Lachu,MIT@123,male,IN,"[""Guns N' Roses"", 'Taylor Swift', 'Coldplay', 'Kings Of Leon', 'Linkin Park']","['Only By The Night', 'My Worlds', 'Fearless', 'Lungs', 'Incredibad']"
-2,Angad,MIT@234,male,/N,"['Kings Of Leon', 'Coldplay', 'Jack Johnson', 'Eminem', ""Guns N' Roses""]",
-3,Sachin,MIT@123,male,US,'',
-4,Sudeep,MIT@123,male,IN,'',
-5,Raj,MIT@123,male,IN,"['Björk', 'Taylor Swift', 'Metallica', 'Dwight Yoakam', 'Gorillaz']","['Summertime', 'If There Was A Way', 'Fat Come Back', ""We Don't Need To Whisper"", 'Fearless']"
-6,Preethi,MIT@123,female,/N,'',
-7,Shanti,MIT@123,female,IN,,
+sno,name,pswd,gender,region,artist_choice,release_choice,user_id,us_index_value
+1,Lachu,MIT@123,male,IN,"[""Guns N' Roses"", 'Taylor Swift', 'Coldplay', 'Kings Of Leon', 'Linkin Park']","['Only By The Night', 'My Worlds', 'Fearless', 'Lungs', 'Incredibad']",4bd2c4b912b71977531c8fe528d044f80b810676,2017
+2,Angad,MIT@234,male,/N,"['Kings Of Leon', 'Coldplay', 'Jack Johnson', 'Eminem', ""Guns N' Roses""]",,47813ba9fbef6ab4fc80b91612fff4c51e008713,2420
+3,Sachin,MIT@123,male,US,'',,6a944bfe30ae8d6b873139e8305ae131f1607d5f,368
+4,Sudeep,MIT@123,male,IN,'',,95e2e5296004cb82eb1b808ab7875022ac34cdd4,4116
+5,Raj,MIT@123,male,IN,"['Björk', 'Taylor Swift', 'Metallica', 'Dwight Yoakam', 'Gorillaz']","['Summertime', 'If There Was A Way', 'Fat Come Back', ""We Don't Need To Whisper"", 'Fearless']",5e810df55348e99527af68253aa10dd1c855cbe3,2388
+6,Preethi,MIT@123,female,/N,'',,16cd9a19b5a433919b3cf86073670369e8d2e4f8,44
+7,Shanti,MIT@123,female,IN,,,4b2be7ca5c1851ab9be539a313dc10b0dc459ad5,5338

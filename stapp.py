@@ -8,11 +8,27 @@ import readdata
 
 local_css('style.css')
 
-with st.spinner('Wait for song, count and imdb_merge data to load ...'):
+with st.spinner('Wait for song data to load ...'):
     song_data = readdata.read_data_gdrive('song_data_with_gender.csv')
+st.success('song data loaded')
+
+
+with st.spinner('Wait for count data to load ...'):
     count_data = readdata.read_data_gdrive('count_data.pkl')
+st.success('count data loaded')
+
+
+with st.spinner('Wait for imdb_merge data to load ...'):
     song_imdb_merge = readdata.read_data_gdrive('song_only_imdb_merge.pkl')
-st.success('song, count and imdb_merge data loaded')
+st.success('imdb_merge data loaded')
+
+
+def pass_song_data():
+    return song_data
+
+
+def pass_count_data():
+    return count_data
 
 def func_welcome(menu_in, level=1):
     # menu_in is menu name, level is signify if its main menu or submenu (only two level possible now)

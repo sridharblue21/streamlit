@@ -7,6 +7,6 @@ def menu():
 
 def submenu_1():
     st.write('\n')
-    menu_choice = st.sidebar.radio("Sub Pages>>>>>", ('Most Played', 'Most Rated'),index=0,key=2)
+    menu_choice = st.sidebar.radio("Sub Pages>>>>>", ('Most Played', 'Most Rated', 'Similar Taste'),index=0,key=2)
     return menu_choice
 

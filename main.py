@@ -9,6 +9,9 @@ from user_list import user_list
 import content_reco
 from senti_collection import top_senti_recommendation
 from load_album_imge import open_image
+from PIL import Image
+from cf_user_item_reco import ui_recommendation
+import pandas as pd
 
 local_css("style.css") # include style.css
 
@@ -17,6 +20,8 @@ def print_hi(name):
     st.markdown(welcome_head,unsafe_allow_html=True)
 
 def main():
+    logo = Image.open('Dhwani Logo.png')
+    st.sidebar.image(logo)
     st.header('Top Songs Recommender System')
     yourname, yourpass, auth = login.login() #get login field values
     if auth == 'authenticated': # display blocks below if authenticated
@@ -37,7 +42,7 @@ def main():
             usr_lst = user_list()
             st.header('Registered users list.')
             st.write('Total no of users: '+str(len(usr_lst.name)))
-            st.table(usr_lst)
+            st.dataframe(usr_lst)
             st.write('\n')
             if yourname == 'Lachu':
                 ret_val = register()  # display user registration option when user is authenticated
@@ -106,13 +111,23 @@ def main():
                     n=st.slider('Select how many song recommendations you would need?',min_value=2, max_value=10)
                     top_rated_songs_title = stapp.top_rated_songs(n, region)  # call popular songs function top-5
                     st.subheader(f"Most rated titles, {n} recommendations for you")
-
-                    st.spinner()
-                    with st.spinner(text='In progress'):
-                        st.table(top_rated_songs_title)
-                        st.success('Done')
+                    st.table(top_rated_songs_title)
                 else:
                     st.write('Choose your region')
+            elif sub_menu_out == 'Similar Taste':
+                n = st.slider('Select how many song recommendations you would need?', min_value=2, max_value=10)
+                usr_lst = user_list()
+                user_id = st.selectbox('Select user', options=list(usr_lst.user_id))
+                if usr_lst[usr_lst.user_id.isin([user_id])].empty:
+                    related_msg = f"<div> >>>>>>>>> <span class='highlight lblue'>Sorry, couldn't find related songs.</span> >>>>>>>>> </div>"
+                    st.markdown(related_msg, unsafe_allow_html=True)
+                else:
+                    user_index = usr_lst[usr_lst.user_id == user_id].us_index_value
+                    ui_reco = ui_recommendation(user_index,n)  # call popular songs function top-5
+                    st.subheader(f"Based on people with similar taste, {n} title recommendations for you")
+                    st.table(ui_reco)
+
+
             st.write('\n')
         elif menu_out == 'Search songs':
 
@@ -140,12 +155,7 @@ def main():
                     related_msg = f"<div> >>>>>>>>> <span class='highlight lblue'>Sorry, couldn't find related songs.</span> >>>>>>>>> </div>"
                     st.markdown(related_msg, unsafe_allow_html=True)
                 else:
-                    #release_images = open_image(recommended_songs.artist_name, recommended_songs.release)
                     st.table(recommended_songs)
-                    #for images in release_images:
-                    #    if not images == None:
-                    #        st.image(images)
-
     else:
         st.sidebar.markdown(auth,unsafe_allow_html=True)
 
